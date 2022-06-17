@@ -34,8 +34,9 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	for {
 		hostname, _ := os.Hostname()
+		workDir, _ := os.Getwd()
 
-		fmt.Printf("[~%s~]> ", hostname)
+		fmt.Printf("[~%s~%s]> ", hostname, workDir)
 
 		input, err := reader.ReadString('\n')
 		if err != nil {
