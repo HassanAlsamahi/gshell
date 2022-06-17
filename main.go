@@ -41,7 +41,10 @@ func main() {
 		fmt.Printf("[%s~%s~%s]> ", user.Username, hostname, workDir)
 
 		input, err := reader.ReadString('\n')
-		if err != nil {
+		if err == io.EOF {
+			fmt.Println("\nGoodbye!!")
+			os.Exit(0)
+		} else if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 
