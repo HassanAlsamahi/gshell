@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"os/user"
 	"strings"
 )
 
@@ -35,8 +36,9 @@ func main() {
 	for {
 		hostname, _ := os.Hostname()
 		workDir, _ := os.Getwd()
+		user, _ := user.Current()
 
-		fmt.Printf("[~%s~%s]> ", hostname, workDir)
+		fmt.Printf("[%s~%s~%s]> ", user.Username, hostname, workDir)
 
 		input, err := reader.ReadString('\n')
 		if err != nil {
