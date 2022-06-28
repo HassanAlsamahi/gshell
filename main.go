@@ -11,6 +11,7 @@ import (
 )
 
 func execInput(input string) error {
+
 	input = strings.TrimSuffix(input, "\n")
 
 	args := strings.Split(input, " ")
@@ -24,13 +25,22 @@ func execInput(input string) error {
 	case "exit":
 		os.Exit(0)
 	case "cd":
-		return os.Chdir(args[1])
+		home_dir, _ := os.UserHomeDir()
+		if len(args) < 2 {
+			return os.Chdir(home_dir)
+		} else {
+			return os.Chdir(args[1])
+		}
+
+	case "\f":
+		args[0] = "clear"
 	}
 
 	return cmd.Run()
 }
 
 func main() {
+	fmt.Println("Hello to Gshell!!")
 
 	reader := bufio.NewReader(os.Stdin)
 	for {
